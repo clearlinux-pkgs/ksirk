@@ -5,26 +5,26 @@
 # Source0 file verified with key 0xDBD2CE893E2D1C87 (cfeck@kde.org)
 #
 Name     : ksirk
-Version  : 18.08.0
-Release  : 2
-URL      : https://download.kde.org/stable/applications/18.08.0/src/ksirk-18.08.0.tar.xz
-Source0  : https://download.kde.org/stable/applications/18.08.0/src/ksirk-18.08.0.tar.xz
-Source99 : https://download.kde.org/stable/applications/18.08.0/src/ksirk-18.08.0.tar.xz.sig
-Summary  : A turn by turn multiplayer strategy game with AI (Risk clone)
+Version  : 18.12.2
+Release  : 3
+URL      : https://download.kde.org/stable/applications/18.12.2/src/ksirk-18.12.2.tar.xz
+Source0  : https://download.kde.org/stable/applications/18.12.2/src/ksirk-18.12.2.tar.xz
+Source99 : https://download.kde.org/stable/applications/18.12.2/src/ksirk-18.12.2.tar.xz.sig
+Summary  : A computerized version of a well known strategy game
 Group    : Development/Tools
 License  : GFDL-1.2 GPL-2.0 LGPL-2.1
-Requires: ksirk-bin
-Requires: ksirk-lib
-Requires: ksirk-data
-Requires: ksirk-license
-Requires: ksirk-locales
+Requires: ksirk-bin = %{version}-%{release}
+Requires: ksirk-data = %{version}-%{release}
+Requires: ksirk-lib = %{version}-%{release}
+Requires: ksirk-license = %{version}-%{release}
+Requires: ksirk-locales = %{version}-%{release}
 BuildRequires : buildreq-cmake
 BuildRequires : buildreq-kde
 BuildRequires : buildreq-qmake
 BuildRequires : libkdegames-dev
 BuildRequires : phonon-dev
 BuildRequires : qca-qt5-dev
-BuildRequires : qtbase-dev qtbase-extras mesa-dev
+BuildRequires : qtbase-dev mesa-dev
 BuildRequires : zlib-dev
 
 %description
@@ -37,8 +37,8 @@ The goal of the game is simply to conquer the World... It is done by attacking y
 %package bin
 Summary: bin components for the ksirk package.
 Group: Binaries
-Requires: ksirk-data
-Requires: ksirk-license
+Requires: ksirk-data = %{version}-%{release}
+Requires: ksirk-license = %{version}-%{release}
 
 %description bin
 bin components for the ksirk package.
@@ -55,10 +55,10 @@ data components for the ksirk package.
 %package dev
 Summary: dev components for the ksirk package.
 Group: Development
-Requires: ksirk-lib
-Requires: ksirk-bin
-Requires: ksirk-data
-Provides: ksirk-devel
+Requires: ksirk-lib = %{version}-%{release}
+Requires: ksirk-bin = %{version}-%{release}
+Requires: ksirk-data = %{version}-%{release}
+Provides: ksirk-devel = %{version}-%{release}
 
 %description dev
 dev components for the ksirk package.
@@ -75,8 +75,8 @@ doc components for the ksirk package.
 %package lib
 Summary: lib components for the ksirk package.
 Group: Libraries
-Requires: ksirk-data
-Requires: ksirk-license
+Requires: ksirk-data = %{version}-%{release}
+Requires: ksirk-license = %{version}-%{release}
 
 %description lib
 lib components for the ksirk package.
@@ -99,28 +99,28 @@ locales components for the ksirk package.
 
 
 %prep
-%setup -q -n ksirk-18.08.0
+%setup -q -n ksirk-18.12.2
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1535432382
-mkdir clr-build
+export SOURCE_DATE_EPOCH=1549906043
+mkdir -p clr-build
 pushd clr-build
 %cmake ..
 make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1535432382
+export SOURCE_DATE_EPOCH=1549906043
 rm -rf %{buildroot}
-mkdir -p %{buildroot}/usr/share/doc/ksirk
-cp COPYING %{buildroot}/usr/share/doc/ksirk/COPYING
-cp COPYING.DOC %{buildroot}/usr/share/doc/ksirk/COPYING.DOC
-cp COPYING.LIB %{buildroot}/usr/share/doc/ksirk/COPYING.LIB
-cp ksirk/iris/COPYING %{buildroot}/usr/share/doc/ksirk/ksirk_iris_COPYING
+mkdir -p %{buildroot}/usr/share/package-licenses/ksirk
+cp COPYING %{buildroot}/usr/share/package-licenses/ksirk/COPYING
+cp COPYING.DOC %{buildroot}/usr/share/package-licenses/ksirk/COPYING.DOC
+cp COPYING.LIB %{buildroot}/usr/share/package-licenses/ksirk/COPYING.LIB
+cp ksirk/iris/COPYING %{buildroot}/usr/share/package-licenses/ksirk/ksirk_iris_COPYING
 pushd clr-build
 %make_install
 popd
@@ -191,6 +191,7 @@ popd
 /usr/share/kxmlgui5/ksirk/ksirkui.rc
 /usr/share/kxmlgui5/ksirkskineditor/ksirkskineditorui.rc
 /usr/share/metainfo/org.kde.ksirk.appdata.xml
+/usr/share/xdg/ksirk.categories
 /usr/share/xdg/ksirk.knsrc
 
 %files dev
@@ -314,11 +315,11 @@ popd
 /usr/lib64/libiris_ksirk.so.2.0.0
 
 %files license
-%defattr(-,root,root,-)
-/usr/share/doc/ksirk/COPYING
-/usr/share/doc/ksirk/COPYING.DOC
-/usr/share/doc/ksirk/COPYING.LIB
-/usr/share/doc/ksirk/ksirk_iris_COPYING
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/ksirk/COPYING
+/usr/share/package-licenses/ksirk/COPYING.DOC
+/usr/share/package-licenses/ksirk/COPYING.LIB
+/usr/share/package-licenses/ksirk/ksirk_iris_COPYING
 
 %files locales -f ksirk.lang -f ksirkskineditor.lang
 %defattr(-,root,root,-)
