@@ -5,11 +5,11 @@
 # Source0 file verified with key 0xDBD2CE893E2D1C87 (cfeck@kde.org)
 #
 Name     : ksirk
-Version  : 19.04.3
-Release  : 9
-URL      : https://download.kde.org/stable/applications/19.04.3/src/ksirk-19.04.3.tar.xz
-Source0  : https://download.kde.org/stable/applications/19.04.3/src/ksirk-19.04.3.tar.xz
-Source99 : https://download.kde.org/stable/applications/19.04.3/src/ksirk-19.04.3.tar.xz.sig
+Version  : 19.08.0
+Release  : 10
+URL      : https://download.kde.org/stable/applications/19.08.0/src/ksirk-19.08.0.tar.xz
+Source0  : https://download.kde.org/stable/applications/19.08.0/src/ksirk-19.08.0.tar.xz
+Source1 : https://download.kde.org/stable/applications/19.08.0/src/ksirk-19.08.0.tar.xz.sig
 Summary  : A computerized version of a well known strategy game
 Group    : Development/Tools
 License  : GFDL-1.2 GPL-2.0 LGPL-2.1
@@ -101,16 +101,17 @@ locales components for the ksirk package.
 
 
 %prep
-%setup -q -n ksirk-19.04.3
+%setup -q -n ksirk-19.08.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1562880397
+export SOURCE_DATE_EPOCH=1565907991
 mkdir -p clr-build
 pushd clr-build
+# -Werror is for werrorists
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -124,7 +125,7 @@ make  %{?_smp_mflags} VERBOSE=1
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1562880397
+export SOURCE_DATE_EPOCH=1565907991
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/ksirk
 cp COPYING %{buildroot}/usr/share/package-licenses/ksirk/COPYING
@@ -201,7 +202,7 @@ popd
 /usr/share/kxmlgui5/ksirk/ksirkui.rc
 /usr/share/kxmlgui5/ksirkskineditor/ksirkskineditorui.rc
 /usr/share/metainfo/org.kde.ksirk.appdata.xml
-/usr/share/xdg/ksirk.categories
+/usr/share/qlogging-categories5/ksirk.categories
 /usr/share/xdg/ksirk.knsrc
 
 %files dev
