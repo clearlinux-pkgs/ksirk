@@ -5,11 +5,11 @@
 # Source0 file verified with key 0xDBD2CE893E2D1C87 (cfeck@kde.org)
 #
 Name     : ksirk
-Version  : 19.08.2
-Release  : 12
-URL      : https://download.kde.org/stable/applications/19.08.2/src/ksirk-19.08.2.tar.xz
-Source0  : https://download.kde.org/stable/applications/19.08.2/src/ksirk-19.08.2.tar.xz
-Source1 : https://download.kde.org/stable/applications/19.08.2/src/ksirk-19.08.2.tar.xz.sig
+Version  : 19.08.3
+Release  : 14
+URL      : https://download.kde.org/stable/applications/19.08.3/src/ksirk-19.08.3.tar.xz
+Source0  : https://download.kde.org/stable/applications/19.08.3/src/ksirk-19.08.3.tar.xz
+Source1 : https://download.kde.org/stable/applications/19.08.3/src/ksirk-19.08.3.tar.xz.sig
 Summary  : A computerized version of a well known strategy game
 Group    : Development/Tools
 License  : GFDL-1.2 GPL-2.0 LGPL-2.1
@@ -101,14 +101,14 @@ locales components for the ksirk package.
 
 
 %prep
-%setup -q -n ksirk-19.08.2
+%setup -q -n ksirk-19.08.3
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1570769087
+export SOURCE_DATE_EPOCH=1573186579
 mkdir -p clr-build
 pushd clr-build
 # -Werror is for werrorists
@@ -125,13 +125,13 @@ make  %{?_smp_mflags}  VERBOSE=1
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1570769087
+export SOURCE_DATE_EPOCH=1573186579
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/ksirk
-cp COPYING %{buildroot}/usr/share/package-licenses/ksirk/COPYING
-cp COPYING.DOC %{buildroot}/usr/share/package-licenses/ksirk/COPYING.DOC
-cp COPYING.LIB %{buildroot}/usr/share/package-licenses/ksirk/COPYING.LIB
-cp ksirk/iris/COPYING %{buildroot}/usr/share/package-licenses/ksirk/ksirk_iris_COPYING
+cp %{_builddir}/ksirk-19.08.3/COPYING %{buildroot}/usr/share/package-licenses/ksirk/0b184ad51ba2a79e85d2288d5fcf8a1ea0481ea4
+cp %{_builddir}/ksirk-19.08.3/COPYING.DOC %{buildroot}/usr/share/package-licenses/ksirk/bd75d59f9d7d9731bfabdc48ecd19e704d218e38
+cp %{_builddir}/ksirk-19.08.3/COPYING.LIB %{buildroot}/usr/share/package-licenses/ksirk/01a6b4bf79aca9b556822601186afab86e8c4fbf
+cp %{_builddir}/ksirk-19.08.3/ksirk/iris/COPYING %{buildroot}/usr/share/package-licenses/ksirk/caeb68c46fa36651acf592771d09de7937926bb3
 pushd clr-build
 %make_install
 popd
@@ -327,10 +327,10 @@ popd
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/ksirk/COPYING
-/usr/share/package-licenses/ksirk/COPYING.DOC
-/usr/share/package-licenses/ksirk/COPYING.LIB
-/usr/share/package-licenses/ksirk/ksirk_iris_COPYING
+/usr/share/package-licenses/ksirk/01a6b4bf79aca9b556822601186afab86e8c4fbf
+/usr/share/package-licenses/ksirk/0b184ad51ba2a79e85d2288d5fcf8a1ea0481ea4
+/usr/share/package-licenses/ksirk/bd75d59f9d7d9731bfabdc48ecd19e704d218e38
+/usr/share/package-licenses/ksirk/caeb68c46fa36651acf592771d09de7937926bb3
 
 %files locales -f ksirk.lang -f ksirkskineditor.lang
 %defattr(-,root,root,-)
