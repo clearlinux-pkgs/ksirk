@@ -6,7 +6,7 @@
 #
 Name     : ksirk
 Version  : 21.08.2
-Release  : 31
+Release  : 32
 URL      : https://download.kde.org/stable/release-service/21.08.2/src/ksirk-21.08.2.tar.xz
 Source0  : https://download.kde.org/stable/release-service/21.08.2/src/ksirk-21.08.2.tar.xz
 Source1  : https://download.kde.org/stable/release-service/21.08.2/src/ksirk-21.08.2.tar.xz.sig
