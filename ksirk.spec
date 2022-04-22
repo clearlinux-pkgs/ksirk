@@ -5,14 +5,14 @@
 # Source0 file verified with key 0xBB463350D6EF31EF (heiko@shruuf.de)
 #
 Name     : ksirk
-Version  : 21.12.3
-Release  : 37
-URL      : https://download.kde.org/stable/release-service/21.12.3/src/ksirk-21.12.3.tar.xz
-Source0  : https://download.kde.org/stable/release-service/21.12.3/src/ksirk-21.12.3.tar.xz
-Source1  : https://download.kde.org/stable/release-service/21.12.3/src/ksirk-21.12.3.tar.xz.sig
+Version  : 22.04.0
+Release  : 38
+URL      : https://download.kde.org/stable/release-service/22.04.0/src/ksirk-22.04.0.tar.xz
+Source0  : https://download.kde.org/stable/release-service/22.04.0/src/ksirk-22.04.0.tar.xz
+Source1  : https://download.kde.org/stable/release-service/22.04.0/src/ksirk-22.04.0.tar.xz.sig
 Summary  : A turn by turn strategy game
 Group    : Development/Tools
-License  : GFDL-1.2 GPL-2.0 LGPL-2.1
+License  : BSD-3-Clause GFDL-1.2 GPL-2.0 LGPL-2.1
 Requires: ksirk-bin = %{version}-%{release}
 Requires: ksirk-data = %{version}-%{release}
 Requires: ksirk-lib = %{version}-%{release}
@@ -101,15 +101,15 @@ locales components for the ksirk package.
 
 
 %prep
-%setup -q -n ksirk-21.12.3
-cd %{_builddir}/ksirk-21.12.3
+%setup -q -n ksirk-22.04.0
+cd %{_builddir}/ksirk-22.04.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1646525347
+export SOURCE_DATE_EPOCH=1650660056
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -125,13 +125,14 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1646525347
+export SOURCE_DATE_EPOCH=1650660056
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/ksirk
-cp %{_builddir}/ksirk-21.12.3/COPYING %{buildroot}/usr/share/package-licenses/ksirk/0b184ad51ba2a79e85d2288d5fcf8a1ea0481ea4
-cp %{_builddir}/ksirk-21.12.3/COPYING.DOC %{buildroot}/usr/share/package-licenses/ksirk/bd75d59f9d7d9731bfabdc48ecd19e704d218e38
-cp %{_builddir}/ksirk-21.12.3/COPYING.LIB %{buildroot}/usr/share/package-licenses/ksirk/01a6b4bf79aca9b556822601186afab86e8c4fbf
-cp %{_builddir}/ksirk-21.12.3/ksirk/iris/COPYING %{buildroot}/usr/share/package-licenses/ksirk/caeb68c46fa36651acf592771d09de7937926bb3
+cp %{_builddir}/ksirk-22.04.0/CMakePresets.json.license %{buildroot}/usr/share/package-licenses/ksirk/29fb05b49e12a380545499938c4879440bd8851e
+cp %{_builddir}/ksirk-22.04.0/COPYING %{buildroot}/usr/share/package-licenses/ksirk/0b184ad51ba2a79e85d2288d5fcf8a1ea0481ea4
+cp %{_builddir}/ksirk-22.04.0/COPYING.DOC %{buildroot}/usr/share/package-licenses/ksirk/bd75d59f9d7d9731bfabdc48ecd19e704d218e38
+cp %{_builddir}/ksirk-22.04.0/COPYING.LIB %{buildroot}/usr/share/package-licenses/ksirk/01a6b4bf79aca9b556822601186afab86e8c4fbf
+cp %{_builddir}/ksirk-22.04.0/ksirk/iris/COPYING %{buildroot}/usr/share/package-licenses/ksirk/caeb68c46fa36651acf592771d09de7937926bb3
 pushd clr-build
 %make_install
 popd
@@ -333,6 +334,7 @@ popd
 %defattr(0644,root,root,0755)
 /usr/share/package-licenses/ksirk/01a6b4bf79aca9b556822601186afab86e8c4fbf
 /usr/share/package-licenses/ksirk/0b184ad51ba2a79e85d2288d5fcf8a1ea0481ea4
+/usr/share/package-licenses/ksirk/29fb05b49e12a380545499938c4879440bd8851e
 /usr/share/package-licenses/ksirk/bd75d59f9d7d9731bfabdc48ecd19e704d218e38
 /usr/share/package-licenses/ksirk/caeb68c46fa36651acf592771d09de7937926bb3
 
