@@ -5,11 +5,11 @@
 # Source0 file verified with key 0xBB463350D6EF31EF (heiko@shruuf.de)
 #
 Name     : ksirk
-Version  : 22.08.1
-Release  : 43
-URL      : https://download.kde.org/stable/release-service/22.08.1/src/ksirk-22.08.1.tar.xz
-Source0  : https://download.kde.org/stable/release-service/22.08.1/src/ksirk-22.08.1.tar.xz
-Source1  : https://download.kde.org/stable/release-service/22.08.1/src/ksirk-22.08.1.tar.xz.sig
+Version  : 22.08.2
+Release  : 44
+URL      : https://download.kde.org/stable/release-service/22.08.2/src/ksirk-22.08.2.tar.xz
+Source0  : https://download.kde.org/stable/release-service/22.08.2/src/ksirk-22.08.2.tar.xz
+Source1  : https://download.kde.org/stable/release-service/22.08.2/src/ksirk-22.08.2.tar.xz.sig
 Summary  : A turn by turn strategy game
 Group    : Development/Tools
 License  : BSD-3-Clause GFDL-1.2 GPL-2.0 LGPL-2.1
@@ -100,15 +100,15 @@ locales components for the ksirk package.
 
 
 %prep
-%setup -q -n ksirk-22.08.1
-cd %{_builddir}/ksirk-22.08.1
+%setup -q -n ksirk-22.08.2
+cd %{_builddir}/ksirk-22.08.2
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1662761074
+export SOURCE_DATE_EPOCH=1665708974
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -124,7 +124,7 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1662761074
+export SOURCE_DATE_EPOCH=1665708974
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/ksirk
 cp %{_builddir}/ksirk-%{version}/CMakePresets.json.license %{buildroot}/usr/share/package-licenses/ksirk/29fb05b49e12a380545499938c4879440bd8851e || :
@@ -300,6 +300,10 @@ popd
 /usr/share/doc/HTML/pt_BR/ksirk/index.docbook
 /usr/share/doc/HTML/pt_BR/ksirkskineditor/index.cache.bz2
 /usr/share/doc/HTML/pt_BR/ksirkskineditor/index.docbook
+/usr/share/doc/HTML/ru/ksirk/index.cache.bz2
+/usr/share/doc/HTML/ru/ksirk/index.docbook
+/usr/share/doc/HTML/ru/ksirkskineditor/index.cache.bz2
+/usr/share/doc/HTML/ru/ksirkskineditor/index.docbook
 /usr/share/doc/HTML/sv/ksirk/index.cache.bz2
 /usr/share/doc/HTML/sv/ksirk/index.docbook
 /usr/share/doc/HTML/sv/ksirkskineditor/index.cache.bz2
