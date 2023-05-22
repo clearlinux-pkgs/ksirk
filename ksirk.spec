@@ -6,11 +6,11 @@
 # Source0 file verified with key 0xBB463350D6EF31EF (heiko@shruuf.de)
 #
 Name     : ksirk
-Version  : 23.04.0
-Release  : 51
-URL      : https://download.kde.org/stable/release-service/23.04.0/src/ksirk-23.04.0.tar.xz
-Source0  : https://download.kde.org/stable/release-service/23.04.0/src/ksirk-23.04.0.tar.xz
-Source1  : https://download.kde.org/stable/release-service/23.04.0/src/ksirk-23.04.0.tar.xz.sig
+Version  : 23.04.1
+Release  : 52
+URL      : https://download.kde.org/stable/release-service/23.04.1/src/ksirk-23.04.1.tar.xz
+Source0  : https://download.kde.org/stable/release-service/23.04.1/src/ksirk-23.04.1.tar.xz
+Source1  : https://download.kde.org/stable/release-service/23.04.1/src/ksirk-23.04.1.tar.xz.sig
 Summary  : A turn by turn strategy game
 Group    : Development/Tools
 License  : BSD-3-Clause GFDL-1.2 GPL-2.0 LGPL-2.1
@@ -103,31 +103,48 @@ locales components for the ksirk package.
 
 
 %prep
-%setup -q -n ksirk-23.04.0
-cd %{_builddir}/ksirk-23.04.0
+%setup -q -n ksirk-23.04.1
+cd %{_builddir}/ksirk-23.04.1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1682021356
+export SOURCE_DATE_EPOCH=1684781649
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
-export FCFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
-export FFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
-export CXXFLAGS="$CXXFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
+export CFLAGS="$CFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+export FCFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+export FFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+export CXXFLAGS="$CXXFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+%cmake ..
+make  %{?_smp_mflags}
+popd
+mkdir -p clr-build-avx2
+pushd clr-build-avx2
+export GCC_IGNORE_WERROR=1
+export AR=gcc-ar
+export RANLIB=gcc-ranlib
+export NM=gcc-nm
+export CFLAGS="$CFLAGS -O3 -Wl,-z,x86-64-v3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd -march=x86-64-v3 "
+export FCFLAGS="$FFLAGS -O3 -Wl,-z,x86-64-v3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd -march=x86-64-v3 "
+export FFLAGS="$FFLAGS -O3 -Wl,-z,x86-64-v3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd -march=x86-64-v3 "
+export CXXFLAGS="$CXXFLAGS -O3 -Wl,-z,x86-64-v3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd -march=x86-64-v3 "
+export CFLAGS="$CFLAGS -march=x86-64-v3 -m64 -Wl,-z,x86-64-v3"
+export CXXFLAGS="$CXXFLAGS -march=x86-64-v3 -m64 -Wl,-z,x86-64-v3"
+export FFLAGS="$FFLAGS -march=x86-64-v3 -m64 -Wl,-z,x86-64-v3"
+export FCFLAGS="$FCFLAGS -march=x86-64-v3 -m64 -Wl,-z,x86-64-v3"
 %cmake ..
 make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1682021356
+export SOURCE_DATE_EPOCH=1684781649
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/ksirk
 cp %{_builddir}/ksirk-%{version}/CMakePresets.json.license %{buildroot}/usr/share/package-licenses/ksirk/29fb05b49e12a380545499938c4879440bd8851e || :
@@ -135,17 +152,23 @@ cp %{_builddir}/ksirk-%{version}/COPYING %{buildroot}/usr/share/package-licenses
 cp %{_builddir}/ksirk-%{version}/COPYING.DOC %{buildroot}/usr/share/package-licenses/ksirk/bd75d59f9d7d9731bfabdc48ecd19e704d218e38 || :
 cp %{_builddir}/ksirk-%{version}/COPYING.LIB %{buildroot}/usr/share/package-licenses/ksirk/01a6b4bf79aca9b556822601186afab86e8c4fbf || :
 cp %{_builddir}/ksirk-%{version}/ksirk/iris/COPYING %{buildroot}/usr/share/package-licenses/ksirk/caeb68c46fa36651acf592771d09de7937926bb3 || :
+pushd clr-build-avx2
+%make_install_v3  || :
+popd
 pushd clr-build
 %make_install
 popd
 %find_lang ksirk
 %find_lang ksirkskineditor
+/usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot} %{buildroot}/usr/share/clear/filemap/filemap-%{name}
 
 %files
 %defattr(-,root,root,-)
 
 %files bin
 %defattr(-,root,root,-)
+/V3/usr/bin/ksirk
+/V3/usr/bin/ksirkskineditor
 /usr/bin/ksirk
 /usr/bin/ksirkskineditor
 
@@ -210,6 +233,7 @@ popd
 
 %files dev
 %defattr(-,root,root,-)
+/V3/usr/lib64/libiris_ksirk.so
 /usr/lib64/libiris_ksirk.so
 
 %files doc
@@ -333,6 +357,8 @@ popd
 
 %files lib
 %defattr(-,root,root,-)
+/V3/usr/lib64/libiris_ksirk.so.2
+/V3/usr/lib64/libiris_ksirk.so.2.0.0
 /usr/lib64/libiris_ksirk.so.2
 /usr/lib64/libiris_ksirk.so.2.0.0
 
